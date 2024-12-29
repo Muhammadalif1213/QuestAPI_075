@@ -3,10 +3,12 @@ package com.example.onlinedb.ui.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,6 +31,39 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.onlinedb.R
 import com.example.onlinedb.model.Mahasiswa
+import com.example.onlinedb.ui.ViewModel.HomeUiState
+
+@Composable
+fun HomeStatus(
+    homeUiState: HomeUiState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    onDeleteClick: (Mahasiswa) -> Unit = {},
+    onDetailClick: (String) -> Unit = {}
+){
+    when(homeUiState) {
+        is HomeUiState.Loading -> OnLoading(modifier = Modifier.fillMaxSize())
+
+        is HomeUiState.Success ->
+            if (homeUiState.mahasiswa.isEmpty()) {
+                return Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "Tidak ada data mahasiswa")
+                }
+            }else{
+                MhsLayout(
+                    mahasiswa = homeUiState.mahasiswa,
+                    modifier = modifier.fillMaxWidth(),
+                    onDeleteClick = {
+                        onDeleteClick(it)
+                    },
+                    onDetailClick = {
+                        onDetailClick(it.nim)
+                    }
+                )
+            }
+        is HomeUiState.Error -> onErr(retryAction, modifier = Modifier.fillMaxSize())
+    }
+}
 
 
 @Composable
@@ -41,7 +76,7 @@ fun OnLoading(modifier: Modifier = Modifier){
 }
 
 @Composable
-fun onErrr(
+fun onErr(
     retryAction: () -> Unit,modifier: Modifier = Modifier
 ){
     Column(
@@ -78,7 +113,7 @@ fun MhsLayout(
                 mahasiswa = mahasiswa,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable{onDetailClick(mahasiswa)},
+                    .clickable { onDetailClick(mahasiswa) },
                 onDeleteClick = {
                     onDeleteClick(mahasiswa)
                 }
