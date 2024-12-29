@@ -3,7 +3,9 @@ package com.example.onlinedb.ui.ViewModel
 import com.example.onlinedb.model.Mahasiswa
 
 
-
+fun Mahasiswa.toUiStateMhs(): InsertUiState = InsertUiState(
+    insertUiEvent = toInsertUiEvent()
+)
 
 fun Mahasiswa.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
     nim = nim,
