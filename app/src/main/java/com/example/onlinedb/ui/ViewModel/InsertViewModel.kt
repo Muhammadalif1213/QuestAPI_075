@@ -3,6 +3,15 @@ package com.example.onlinedb.ui.ViewModel
 import com.example.onlinedb.model.Mahasiswa
 
 
+fun InsertUiEvent.toMhs(): Mahasiswa = Mahasiswa(
+    nim = nim,
+    nama = nama,
+    jenisKelamin = jenisKelamin,
+    alamat = alamat,
+    kelas = kelas,
+    angkatan = angkatan
+)
+
 fun Mahasiswa.toUiStateMhs(): InsertUiState = InsertUiState(
     insertUiEvent = toInsertUiEvent()
 )
@@ -13,6 +22,7 @@ fun Mahasiswa.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
     jenisKelamin = jenisKelamin,
     alamat = alamat,
     kelas = kelas,
+    angkatan = angkatan
 )
 
 data class InsertUiState(
