@@ -26,6 +26,7 @@ import com.example.onlinedb.ui.Navigation.DestinasiNavigasi
 import com.example.onlinedb.ui.ViewModel.InsertUiEvent
 import com.example.onlinedb.ui.ViewModel.InsertUiState
 import com.example.onlinedb.ui.ViewModel.InsertViewModel
+import com.example.onlinedb.ui.ViewModel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
 object DestinasiEntry: DestinasiNavigasi {
