@@ -26,10 +26,18 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.onlinedb.model.Mahasiswa
 import com.example.onlinedb.ui.CustomWidget.CustomTopAppBar
+import com.example.onlinedb.ui.Navigation.DestinasiNavigasi
 import com.example.onlinedb.ui.ViewModel.DetailUiState
 import com.example.onlinedb.ui.ViewModel.DetailViewModel
 import com.example.onlinedb.ui.ViewModel.PenyediaViewModel
 
+
+object DestinasiDetail: DestinasiNavigasi {
+    override val route = "item_detail"
+    override val titleRes= "Detail Mhs"
+    const val NIM = "nim"
+    val routeWithArgs = "$route/{$NIM}"
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +52,7 @@ fun DetailView(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CustomTopAppBar(
-                title = "",
+                title = DestinasiDetail.titleRes,
                 canNavigateBack = true,
                 scrollBehavior = scrollBehavior,
                 navigateUp = navigateBack,
