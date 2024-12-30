@@ -8,10 +8,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.onlinedb.ui.CustomWidget.CustomTopAppBar
+import com.example.onlinedb.ui.Navigation.DestinasiNavigasi
 import com.example.onlinedb.ui.ViewModel.PenyediaViewModel
 import com.example.onlinedb.ui.ViewModel.UpdateViewModel
 import kotlinx.coroutines.launch
 
+
+object DestinasiUpdate: DestinasiNavigasi {
+    override val route = "item_update"
+    override val titleRes= "Update Mhs"
+    const val NIM = "nim"
+    val routeWithArgs = "$route/{$NIM}"
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +32,7 @@ fun UpdateView(
         Scaffold(
             topBar = {
                 CustomTopAppBar(
-                    title = "",
+                    title = DestinasiUpdate.titleRes,
                     canNavigateBack = true,
                     navigateUp = navigateBack
                 )
